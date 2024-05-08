@@ -3,9 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Monkey Type Clone - Test your typing skills! =</title>
+    <style>
+        :root{
+            color-scheme:  light dark;
+            --green: #00b755;
+            --yellow: #daaf38;
+            --red: #ca4754;
+            --black: #222;
+            --gray: #999;
+        }
+        
+        body {
+            background: var(--black);
+            font-family: Menlo ,monospace;
+            display: grid;
+            padding: 32px;
+            justify-content: center;
+            margin-top: 32px;
+            padding: 16px;
+        }
+
+        section {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            max-width: 500px;
+        }
+
+        time {
+            color: var(--yellow);
+        }
+
+        input {
+            z-index: -999;
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            /* opacity: 0; */
+        }
+
+        p {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px 8px;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
-    
+    <main>
+        <section id="game">
+        <time>30</time>
+        <paragraph></paragraph>
+        <input autofocus>
+        </section>
+    </main>
 </body>
 </html>
+
+<script>
+    const $time = document.querySelector('time')
+    const $paragraph = document.querySelector('p');
+    const $input = document.querySelector('input');
+
+    const INITIAL_TIME = 30;
+
+    const TEXT = 'the quick brown fox jump over the lazy dog and wesly is trying to clone monkey type for fun and profit using vanilla js for the typing test speed'
+
+    let words = []
+    let currentTime = INITIAL_TIME;
+
+    initGame()
+    initEvents()
+
+    function initGame(){
+        words = TEXT.split(' ').slice(0, 32)
+        currentTime = INITIAL_TIME
+
+        $time.textContent = currentTime
+
+        $paragraph.innerHTML = words.map((word, index)) => {
+            const letter = word.split('')
+
+            return `<x-word>
+                ${letters
+                    .map(letter => `<x.letter>${letter}</x-letter>`)
+                    .join('')
+                }
+            </x-word>;
+            
+        }`.join('')
+    }
+</script>
